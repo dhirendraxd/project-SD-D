@@ -2,6 +2,10 @@ import restaurant1 from "@/assets/restaurant-1.jpg";
 import restaurant2 from "@/assets/restaurant-2.jpg";
 import restaurant3 from "@/assets/restaurant-3.jpg";
 import restaurant4 from "@/assets/restaurant-4.jpg";
+import restaurant5 from "@/assets/restaurant-5.jpg";
+import restaurant6 from "@/assets/restaurant-6.jpg";
+import restaurant7 from "@/assets/restaurant-7.jpg";
+import restaurant8 from "@/assets/restaurant-8.jpg";
 import food1 from "@/assets/food-1.jpg";
 import food2 from "@/assets/food-2.jpg";
 import food3 from "@/assets/food-3.jpg";
@@ -146,6 +150,96 @@ export const restaurants: Restaurant[] = [
       { id: "m14", name: "Spaghetti Carbonara", description: "Guanciale, pecorino, egg yolk, black pepper", price: 22, image: food2, category: "Main", prepTime: 12 },
       { id: "m15", name: "Panna Cotta", description: "Vanilla bean custard with berry compote", price: 12, image: food3, category: "Dessert", prepTime: 5 },
       { id: "m16", name: "Caprese Salad", description: "Buffalo mozzarella, heirloom tomatoes, fresh basil", price: 14, image: food4, category: "Starter", prepTime: 5 },
+    ],
+  },
+  {
+    id: "5",
+    name: "Sakura Omakase",
+    location: "West Village, NYC",
+    rating: 4.9,
+    reviewCount: 287,
+    priceRange: "$$$$",
+    cuisine: "Japanese",
+    description: "An intimate omakase experience led by Chef Tanaka. Each course is a masterpiece of seasonal Japanese ingredients.",
+    image: restaurant5,
+    tables: [
+      { id: "t16", type: "standard", seats: 2, price: 50, available: true, label: "Sushi Counter for 2" },
+      { id: "t17", type: "vip", seats: 4, price: 120, available: true, label: "Private Tatami for 4" },
+      { id: "t18", type: "standard", seats: 2, price: 40, available: false, label: "Garden View for 2" },
+    ],
+    menu: [
+      { id: "m17", name: "Omakase Set", description: "12-course chef's selection of the finest seasonal sushi", price: 150, image: food1, category: "Main", popular: true, prepTime: 60 },
+      { id: "m18", name: "Wagyu Tataki", description: "Seared A5 wagyu with ponzu and truffle", price: 45, image: food2, category: "Starter", popular: true, prepTime: 12 },
+      { id: "m19", name: "Matcha Mochi", description: "House-made mochi with ceremonial grade matcha", price: 16, image: food3, category: "Dessert", prepTime: 5 },
+      { id: "m20", name: "Edamame Trio", description: "Three preparations: truffle salt, spicy garlic, classic sea salt", price: 12, image: food4, category: "Starter", prepTime: 5 },
+    ],
+  },
+  {
+    id: "6",
+    name: "Le Petit Jardin",
+    location: "Upper East Side, NYC",
+    rating: 4.5,
+    reviewCount: 163,
+    priceRange: "$$$",
+    cuisine: "French",
+    description: "Classic French bistro charm with a modern twist. Garden patio dining with an award-winning wine cellar.",
+    image: restaurant6,
+    tables: [
+      { id: "t19", type: "standard", seats: 2, price: 30, available: true, label: "Patio Table for 2" },
+      { id: "t20", type: "standard", seats: 4, price: 45, available: true, label: "Garden Table for 4" },
+      { id: "t21", type: "vip", seats: 6, price: 100, available: true, label: "Wine Room for 6" },
+    ],
+    menu: [
+      { id: "m21", name: "Duck Confit", description: "Slow-cooked duck leg with lentils du Puy and red wine jus", price: 42, image: food1, category: "Main", popular: true, prepTime: 25 },
+      { id: "m22", name: "Bouillabaisse", description: "Provençal fish stew with saffron rouille and gruyère toast", price: 38, image: food2, category: "Main", prepTime: 20 },
+      { id: "m23", name: "Crème Brûlée", description: "Madagascar vanilla custard with caramelized sugar", price: 14, image: food3, category: "Dessert", prepTime: 5 },
+      { id: "m24", name: "French Onion Soup", description: "Caramelized onion broth with gruyère crouton", price: 16, image: food4, category: "Starter", popular: true, prepTime: 10 },
+    ],
+  },
+  {
+    id: "7",
+    name: "Casa del Sol",
+    location: "Miami Beach, FL",
+    rating: 4.4,
+    reviewCount: 342,
+    priceRange: "$$",
+    cuisine: "Mexican",
+    description: "Vibrant Mexican flavors in a lively beachside setting. From street tacos to elevated mole, every dish celebrates tradition.",
+    image: restaurant7,
+    tables: [
+      { id: "t22", type: "standard", seats: 2, price: 15, available: true, label: "Bar Table for 2" },
+      { id: "t23", type: "standard", seats: 4, price: 25, available: true, label: "Fiesta Table for 4" },
+      { id: "t24", type: "group", seats: 10, price: 70, available: true, label: "Party Table for 10" },
+      { id: "t25", type: "standard", seats: 4, price: 30, available: true, label: "Patio Table for 4" },
+    ],
+    menu: [
+      { id: "m25", name: "Birria Tacos", description: "Slow-braised beef tacos with consommé for dipping", price: 18, image: food1, category: "Main", popular: true, prepTime: 12 },
+      { id: "m26", name: "Mole Enchiladas", description: "Chicken enchiladas with house-made oaxacan mole negro", price: 22, image: food2, category: "Main", prepTime: 15 },
+      { id: "m27", name: "Churros", description: "Cinnamon sugar churros with chocolate and cajeta dipping sauces", price: 10, image: food3, category: "Dessert", prepTime: 8 },
+      { id: "m28", name: "Guacamole Tableside", description: "Fresh avocado, serrano, lime, prepared at your table", price: 14, image: food4, category: "Starter", popular: true, prepTime: 5 },
+    ],
+  },
+  {
+    id: "8",
+    name: "Maharaja Palace",
+    location: "Midtown, Manhattan",
+    rating: 4.6,
+    reviewCount: 198,
+    priceRange: "$$$",
+    cuisine: "Indian",
+    description: "Royal Indian dining with recipes from the palaces of Rajasthan. Tandoor specialties and aromatic curries in an opulent setting.",
+    image: restaurant8,
+    tables: [
+      { id: "t26", type: "standard", seats: 2, price: 20, available: true, label: "Alcove Table for 2" },
+      { id: "t27", type: "standard", seats: 4, price: 35, available: true, label: "Main Hall for 4" },
+      { id: "t28", type: "vip", seats: 6, price: 85, available: true, label: "Maharaja Room for 6" },
+      { id: "t29", type: "group", seats: 12, price: 140, available: true, label: "Banquet for 12" },
+    ],
+    menu: [
+      { id: "m29", name: "Lamb Rogan Josh", description: "Slow-cooked Kashmiri lamb in aromatic spices and yogurt", price: 28, image: food1, category: "Main", popular: true, prepTime: 20 },
+      { id: "m30", name: "Butter Chicken", description: "Tandoori chicken in creamy tomato-cashew sauce with naan", price: 24, image: food2, category: "Main", popular: true, prepTime: 15 },
+      { id: "m31", name: "Gulab Jamun", description: "Rose-scented milk dumplings in cardamom syrup", price: 10, image: food3, category: "Dessert", prepTime: 5 },
+      { id: "m32", name: "Samosa Chaat", description: "Crispy samosas topped with chutneys, yogurt, and pomegranate", price: 12, image: food4, category: "Starter", prepTime: 8 },
     ],
   },
 ];
