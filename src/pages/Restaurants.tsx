@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import { useSearchParams } from "react-router-dom";
 import { Search, SlidersHorizontal, X, Star, MapPin } from "lucide-react";
 import { restaurants } from "@/data/mockData";
 import Navbar from "@/components/Navbar";
@@ -13,12 +14,20 @@ const priceRanges = [...new Set(restaurants.map((r) => r.priceRange))];
 const locations = [...new Set(restaurants.map((r) => r.location))];
 
 const Restaurants = () => {
-  const [query, setQuery] = useState("");
+  const [searchParams] = useSearchParams();
+  const initialLocation = searchParams.get("location") || "";
+  const initialDate = searchParams.get("date") || "";
+  const initialGuests = Number(searchParams.get("guests") || "2");
+
+  const [query, setQuery] = useState(initialLocation);
   const [selectedCuisines, setSelectedCuisines] = useState<string[]>([]);
   const [selectedPrices, setSelectedPrices] = useState<string[]>([]);
   const [selectedLocations, setSelectedLocations] = useState<string[]>([]);
   const [minRating, setMinRating] = useState(0);
   const [showFilters, setShowFilters] = useState(true);
+
+  const normalizedLocation = initialLocation.trim().toLowerCase();
+  const selectedGuestCount = Number.isFinite(initialGuests) && initialGuests > 0 ? initialGuests : 2;
 
   const toggle = (arr: string[], val: string, setter: (v: string[]) => void) => {
     setter(arr.includes(val) ? arr.filter((v) => v !== val) : [...arr, val]);
@@ -38,13 +47,15 @@ const Restaurants = () => {
   const filtered = useMemo(() => {
     return restaurants.filter((r) => {
       if (query && !r.name.toLowerCase().includes(query.toLowerCase()) && !r.cuisine.toLowerCase().includes(query.toLowerCase()) && !r.location.toLowerCase().includes(query.toLowerCase())) return false;
+      if (normalizedLocation && !r.location.toLowerCase().includes(normalizedLocation) && !r.name.toLowerCase().includes(normalizedLocation)) return false;
       if (selectedCuisines.length && !selectedCuisines.includes(r.cuisine)) return false;
       if (selectedPrices.length && !selectedPrices.includes(r.priceRange)) return false;
       if (selectedLocations.length && !selectedLocations.includes(r.location)) return false;
       if (minRating > 0 && r.rating < minRating) return false;
+      if (selectedGuestCount > 0 && !r.tables.some((table) => table.available && table.seats >= selectedGuestCount)) return false;
       return true;
     });
-  }, [query, selectedCuisines, selectedPrices, selectedLocations, minRating]);
+  }, [query, normalizedLocation, selectedCuisines, selectedPrices, selectedLocations, minRating, selectedGuestCount]);
 
   const ratingOptions = [4.5, 4.0, 3.5];
 
@@ -60,6 +71,11 @@ const Restaurants = () => {
             <p className="text-muted-foreground text-sm">
               {filtered.length} restaurant{filtered.length !== 1 ? "s" : ""} found
             </p>
+            {(initialLocation || initialDate || searchParams.get("guests")) && (
+              <p className="text-xs text-muted-foreground mt-2">
+                Search applied: {initialLocation || "any location"} · {initialDate || "any date"} · {selectedGuestCount} guest{selectedGuestCount !== 1 ? "s" : ""}
+              </p>
+            )}
           </div>
           <Button
             variant="outline"

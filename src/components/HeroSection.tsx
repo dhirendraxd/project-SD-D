@@ -12,7 +12,13 @@ const HeroSection = () => {
   const [guests, setGuests] = useState("2");
 
   const handleSearch = () => {
-    navigate("/restaurants");
+    const params = new URLSearchParams();
+
+    if (location.trim()) params.set("location", location.trim());
+    if (date.trim()) params.set("date", date.trim());
+    if (guests.trim()) params.set("guests", guests.trim());
+
+    navigate(`/restaurants?${params.toString()}`);
   };
 
   return (
@@ -24,22 +30,22 @@ const HeroSection = () => {
 
       <div className="relative section-padding w-full pt-24 pb-16">
         <div className="max-w-2xl animate-slide-up">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-primary-foreground leading-tight mb-4">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-primary-foreground leading-tight tracking-tight mb-4">
             Book the best tables in beautiful restaurants
           </h1>
-          <p className="text-primary-foreground/80 text-lg mb-8 font-body">
+          <p className="text-primary-foreground/80 text-lg md:text-xl mb-8 font-body max-w-xl">
             Discover top dining spots, reserve your table, and pre-order your meal for a seamless experience.
           </p>
         </div>
 
-        <div className="mt-8 bg-background rounded-xl p-4 md:p-6 card-shadow max-w-4xl animate-fade-in">
-          <h2 className="text-lg font-heading font-semibold text-foreground mb-4">Start your search</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <div className="mt-8 bg-background/95 backdrop-blur-sm border border-border rounded-none p-5 md:p-6 max-w-4xl animate-fade-in">
+          <h2 className="text-xl md:text-2xl font-heading font-semibold text-foreground mb-5">Start your search</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div className="relative">
               <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
                 placeholder="Location"
-                className="pl-10"
+                className="pl-10 h-11 text-base"
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
               />
@@ -47,8 +53,9 @@ const HeroSection = () => {
             <div className="relative">
               <CalendarDays className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
-                type="date"
-                className="pl-10"
+                type="text"
+                placeholder="mm/dd/yyyy"
+                className="pl-10 h-11 text-base"
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
               />
@@ -60,12 +67,12 @@ const HeroSection = () => {
                 min="1"
                 max="20"
                 placeholder="Guests"
-                className="pl-10"
+                className="pl-10 h-11 text-base"
                 value={guests}
                 onChange={(e) => setGuests(e.target.value)}
               />
             </div>
-            <Button onClick={handleSearch} className="w-full">
+            <Button onClick={handleSearch} className="w-full h-11 text-base rounded-none">
               <Search className="h-4 w-4 mr-2" />
               Search
             </Button>

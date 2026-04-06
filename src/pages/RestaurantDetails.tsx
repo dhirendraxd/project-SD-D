@@ -83,43 +83,59 @@ const RestaurantDetails = () => {
       </div>
 
       <div className="section-padding py-10">
-        <p className="text-muted-foreground max-w-2xl mb-10">{restaurant.description}</p>
+        <p className="text-muted-foreground max-w-2xl text-base md:text-lg leading-7 mb-10">{restaurant.description}</p>
 
         {/* Date & Time */}
-        <div className="mb-10">
-          <h2 className="text-2xl font-heading font-semibold text-foreground mb-4 flex items-center gap-2">
+        <div className="mb-10 rounded-none border border-border bg-card p-5 md:p-6">
+          <h2 className="text-2xl md:text-3xl font-heading font-semibold text-foreground mb-2 flex items-center gap-2">
             <Clock className="h-5 w-5 text-primary" /> Select Date & Time
           </h2>
-          <div className="flex flex-wrap gap-3 mb-4">
-            <Input type="date" className="w-auto" value={selectedDate} onChange={(e) => setSelectedDate(e.target.value)} />
-            <select
-              className="border border-input rounded-lg px-3 py-2 text-sm bg-background text-foreground"
-              value={selectedDuration}
-              onChange={(e) => setSelectedDuration(Number(e.target.value))}
-            >
+          <p className="text-sm text-muted-foreground mb-5">Pick one date, one time, and how long you want the table for.</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-5">
+            <div>
+              <label className="block text-sm font-medium text-foreground mb-2">Date</label>
+              <Input
+                type="date"
+                className="h-11 text-base rounded-none"
+                value={selectedDate}
+                onChange={(e) => setSelectedDate(e.target.value)}
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-foreground mb-2">Time</label>
+              <select
+                className="w-full h-11 border border-input bg-background px-3 text-base text-foreground rounded-none"
+                value={selectedTime}
+                onChange={(e) => setSelectedTime(e.target.value)}
+              >
+                <option value="">Select time</option>
+                {timeSlots.map((t) => (
+                  <option key={t} value={t}>
+                    {t}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-foreground mb-2">Duration</label>
+              <select
+                className="w-full h-11 border border-input bg-background px-3 text-base text-foreground rounded-none"
+                value={selectedDuration}
+                onChange={(e) => setSelectedDuration(Number(e.target.value))}
+              >
               <option value={1}>1 hour</option>
               <option value={1.5}>1.5 hours</option>
               <option value={2}>2 hours</option>
               <option value={3}>3 hours</option>
-            </select>
+              </select>
+            </div>
           </div>
-          <div className="flex flex-wrap gap-2">
-            {timeSlots.map((t) => (
-              <Button
-                key={t}
-                variant={selectedTime === t ? "default" : "outline"}
-                size="sm"
-                onClick={() => setSelectedTime(t)}
-              >
-                {t}
-              </Button>
-            ))}
-          </div>
+          <div className="text-sm text-muted-foreground">Available times are shown in a simple selector to keep booking fast.</div>
         </div>
 
         {/* Tables */}
         <div className="mb-10">
-          <h2 className="text-2xl font-heading font-semibold text-foreground mb-4 flex items-center gap-2">
+          <h2 className="text-2xl md:text-3xl font-heading font-semibold text-foreground mb-4 flex items-center gap-2">
             <Users className="h-5 w-5 text-primary" /> Choose Your Table
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -197,17 +213,17 @@ const RestaurantDetails = () => {
         </div>
 
         {/* Proceed */}
-        <div className="sticky bottom-4 bg-card border border-border rounded-xl p-4 card-shadow flex items-center justify-between">
+        <div className="sticky bottom-4 bg-card border border-border rounded-none p-4 card-shadow flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
-            <span className="text-sm text-muted-foreground">
+            <span className="text-sm md:text-base text-muted-foreground">
               {booking.table ? booking.table.label : "No table selected"}
               {booking.foodOrders.length > 0 && ` + ${booking.foodOrders.length} food item(s)`}
             </span>
-            <p className="text-lg font-heading font-bold text-foreground">
+            <p className="text-xl md:text-2xl font-heading font-bold text-foreground">
               Total: <span className="text-primary">${booking.table ? (booking.table.price + booking.foodOrders.reduce((s, o) => s + o.item.price * o.quantity, 0)) : 0}</span>
             </p>
           </div>
-          <Button onClick={handleProceed} size="lg">
+          <Button onClick={handleProceed} size="lg" className="rounded-none h-11 px-6">
             Review & Book
           </Button>
         </div>

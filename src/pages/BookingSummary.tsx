@@ -55,53 +55,53 @@ const BookingSummary = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       <div className="pt-24 pb-16 section-padding max-w-2xl mx-auto">
-        <h1 className="text-3xl font-heading font-bold text-foreground mb-2">Review Your Booking</h1>
-        <p className="text-muted-foreground mb-8">Please review the details before confirming</p>
+        <h1 className="text-3xl md:text-4xl font-heading font-bold text-foreground mb-2 tracking-tight">Review Your Booking</h1>
+        <p className="text-muted-foreground text-base md:text-lg mb-8 max-w-xl">Double-check the booking details below before you send the reservation request.</p>
 
         <div className="space-y-6">
           {/* Restaurant */}
-          <div className="rounded-xl border border-border overflow-hidden bg-card">
+          <div className="rounded-none border border-border overflow-hidden bg-card">
             <img src={restaurant.image} alt={restaurant.name} className="w-full h-40 object-cover" />
-            <div className="p-4">
-              <h2 className="font-heading text-xl font-semibold text-foreground">{restaurant.name}</h2>
-              <p className="text-muted-foreground text-sm">{restaurant.location}</p>
+            <div className="p-5">
+              <h2 className="font-heading text-2xl font-semibold text-foreground">{restaurant.name}</h2>
+              <p className="text-muted-foreground text-base mt-1">{restaurant.location}</p>
             </div>
           </div>
 
           {/* Details */}
-          <div className="rounded-xl border border-border bg-card p-5 space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+          <div className="rounded-none border border-border bg-card p-5 space-y-5">
+            <div className="flex items-center gap-4">
+              <div className="w-11 h-11 rounded-none bg-primary/10 flex items-center justify-center">
                 <CalendarDays className="h-5 w-5 text-primary" />
               </div>
               <div>
                 <p className="text-sm text-muted-foreground">Date</p>
-                <p className="font-semibold text-foreground">{booking.date}</p>
+                <p className="font-semibold text-foreground text-lg">{booking.date}</p>
               </div>
             </div>
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+            <div className="flex items-center gap-4">
+              <div className="w-11 h-11 rounded-none bg-primary/10 flex items-center justify-center">
                 <Clock className="h-5 w-5 text-primary" />
               </div>
               <div>
                 <p className="text-sm text-muted-foreground">Time & Duration</p>
-                <p className="font-semibold text-foreground">{booking.time} · {booking.duration} hr(s)</p>
+                <p className="font-semibold text-foreground text-lg">{booking.time} · {booking.duration} hr(s)</p>
               </div>
             </div>
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+            <div className="flex items-center gap-4">
+              <div className="w-11 h-11 rounded-none bg-primary/10 flex items-center justify-center">
                 <Users className="h-5 w-5 text-primary" />
               </div>
               <div>
                 <p className="text-sm text-muted-foreground">Table</p>
-                <p className="font-semibold text-foreground">{booking.table.label}</p>
+                <p className="font-semibold text-foreground text-lg">{booking.table.label}</p>
               </div>
             </div>
           </div>
 
           {/* Food Orders */}
           {booking.foodOrders.length > 0 && (
-            <div className="rounded-xl border border-border bg-card p-5">
+            <div className="rounded-none border border-border bg-card p-5">
               <h3 className="font-heading font-semibold text-foreground mb-3 flex items-center gap-2">
                 <UtensilsCrossed className="h-4 w-4 text-primary" /> Pre-Ordered Food
               </h3>
@@ -119,28 +119,28 @@ const BookingSummary = () => {
           )}
 
           {/* Total */}
-          <div className="rounded-xl border-2 border-primary bg-primary/5 p-5">
+          <div className="rounded-none border border-primary bg-primary/5 p-5">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-muted-foreground">Table reservation</p>
-                <p className="font-semibold text-foreground">${booking.table.price}</p>
+                <p className="font-semibold text-foreground text-lg">${booking.table.price}</p>
               </div>
               {booking.foodOrders.length > 0 && (
                 <div className="text-right">
                   <p className="text-sm text-muted-foreground">Food pre-order</p>
-                  <p className="font-semibold text-foreground">
+                  <p className="font-semibold text-foreground text-lg">
                     ${booking.foodOrders.reduce((s, o) => s + o.item.price * o.quantity, 0)}
                   </p>
                 </div>
               )}
             </div>
             <div className="border-t border-primary/20 mt-4 pt-4 flex items-center justify-between">
-              <span className="text-lg font-heading font-bold text-foreground">Total</span>
-              <span className="text-2xl font-heading font-bold text-primary">${getTotalPrice()}</span>
+              <span className="text-xl font-heading font-bold text-foreground">Total</span>
+              <span className="text-3xl font-heading font-bold text-primary">${getTotalPrice()}</span>
             </div>
           </div>
 
-          <Button onClick={handleConfirm} size="lg" className="w-full">
+          <Button onClick={handleConfirm} size="lg" className="w-full h-11 rounded-none text-base">
             <Check className="h-4 w-4 mr-2" /> Confirm Booking
           </Button>
         </div>
