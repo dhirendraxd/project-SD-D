@@ -24,7 +24,7 @@ const BookingSummary = () => {
     );
   }
 
-  const handleConfirm = () => {
+  const handleConfirm = async () => {
     const newBooking = {
       id: `b${Date.now()}`,
       restaurantId: restaurant.id,
@@ -37,12 +37,18 @@ const BookingSummary = () => {
       table: booking.table!,
       foodItems: booking.foodOrders,
       totalPrice: getTotalPrice(),
-      status: "confirmed" as const,
+      status: "pending" as const,
     };
-    addBooking(newBooking);
-    resetBooking();
-    toast.success("Booking confirmed! 🎉");
-    navigate("/dashboard");
+
+    try {
+      await addBooking(newBooking);
+      resetBooking();
+      toast.success("Booking request submitted! Waiting for restaurant approval.");
+      navigate("/dashboard");
+    } catch (error) {
+      console.error(error);
+      toast.error("Could not save booking. Please try again.");
+    }
   };
 
   return (
